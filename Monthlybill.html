@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Monthly Work Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; background: #f9f9f9; }
+    h2 { color: #333; }
+    .filters { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); width: 500px; margin-bottom: 20px; }
+    label { font-weight: bold; margin-top: 10px; display: block; }
+    select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    table { border-collapse: collapse; width: 100%; background: #fff; margin-top: 15px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #eee; }
+    .print-btn { margin-top: 20px; padding: 10px 15px; background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    .print-btn:hover { background: #0056b3; }
+    @media print {
+      .filters, .print-btn { display: none; }
+      body { margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Monthly Work Report</h2>
+
+  <!-- Filters -->
+  <div class="filters">
+    <label>Employee Name</label>
+    <select id="empName">
+      <option value="">-- Select Employee --</option>
+      <option value="Ali Khan">Ali Khan</option>
+      <option value="Uzair Ahmed">Uzair Ahmed</option>
+      <option value="Sara Bibi">Sara Bibi</option>
+      <option value="Bilal Sheikh">Bilal Sheikh</option>
+    </select>
+
+    <label>Month</label>
+    <select id="monthSelect">
+      <option value="Nov 2025">November 2025</option>
+      <option value="Dec 2025">December 2025</option>
+      <option value="Jan 2026">January 2026</option>
+    </select>
+  </div>
+
+  <!-- Monthly Table -->
+  <table id="reportTable">
+    <thead>
+      <tr><th>Date</th><th>Amount</th></tr>
+    </thead>
+    <tbody>
+      <!-- Dummy data for November -->
+      <tr><td>1 Nov</td><td class="amt">700</td></tr>
+      <tr><td>2 Nov</td><td class="amt">2500</td></tr>
+      <tr><td>3 Nov</td><td class="amt">1200</td></tr>
+      <tr><td>4 Nov</td><td class="amt">1800</td></tr>
+      <tr><td>5 Nov</td><td class="amt">900</td></tr>
+      <tr><td>6 Nov</td><td class="amt">1500</td></tr>
+      <tr><td>7 Nov</td><td class="amt">2200</td></tr>
+      <tr><td>8 Nov</td><td class="amt">700</td></tr>
+      <tr><td>9 Nov</td><td class="amt">2500</td></tr>
+      <tr><td>10 Nov</td><td class="amt">1000</td></tr>
+      <tr><td>11 Nov</td><td class="amt">1700</td></tr>
+      <tr><td>12 Nov</td><td class="amt">2100</td></tr>
+      <tr><td>13 Nov</td><td class="amt">800</td></tr>
+      <tr><td>14 Nov</td><td class="amt">2600</td></tr>
+      <tr><td>15 Nov</td><td class="amt">900</td></tr>
+      <tr><td>16 Nov</td><td class="amt">1400</td></tr>
+      <tr><td>17 Nov</td><td class="amt">2000</td></tr>
+      <tr><td>18 Nov</td><td class="amt">700</td></tr>
+      <tr><td>19 Nov</td><td class="amt">2500</td></tr>
+      <tr><td>20 Nov</td><td class="amt">1200</td></tr>
+      <tr><td>21 Nov</td><td class="amt">1800</td></tr>
+      <tr><td>22 Nov</td><td class="amt">900</td></tr>
+      <tr><td>23 Nov</td><td class="amt">1500</td></tr>
+      <tr><td>24 Nov</td><td class="amt">2200</td></tr>
+      <tr><td>25 Nov</td><td class="amt">700</td></tr>
+      <tr><td>26 Nov</td><td class="amt">2500</td></tr>
+      <tr><td>27 Nov</td><td class="amt">1000</td></tr>
+      <tr><td>28 Nov</td><td class="amt">1700</td></tr>
+      <tr><td>29 Nov</td><td class="amt">2100</td></tr>
+      <tr><td>30 Nov</td><td class="amt">800</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><th>Total</th><th id="totalAmount"></th></tr>
+    </tfoot>
+  </table>
+
+  <!-- Print Button -->
+  <button class="print-btn" onclick="window.print()">Print Report</button>
+  <button class="print-btn" onclick="goToEmployeePage()">Go to Employee Page</button>
+  
+
+  <script>
+    // Calculate total amount dynamically
+    function calculateTotal() {
+      let sum = 0;
+      document.querySelectorAll('.amt').forEach(cell => {
+        sum += parseInt(cell.textContent) || 0;
+      });
+      document.getElementById('totalAmount').textContent = "Rs " + sum.toLocaleString();
+    }
+      // Navigation function
+    function goToEmployeePage() {
+      // yahan apna employee page ka file path dalna hoga
+      window.location.href = "emb.html";  
+    }
+    calculateTotal();
+  </script>
+
+</body>
+</html>
