@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stitches Calculation</title>
+  <style>
+    table { border-collapse: collapse; width: 70%; margin: 20px auto; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #f0f0f0; }
+    .summary { text-align: center; margin-top: 20px; font-weight: bold; }
+    .btn { display:block; margin:20px auto; padding:10px 20px; background:#0078d7; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+    .btn:hover { background:#005fa3; }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">Stitches Entry</h2>
+  <div id="info" style="text-align:center; margin-bottom:20px;"></div>
+
+  <table>
+    <tr>
+      <th>Row</th>
+      <th>Rounds</th>
+      <th>Stitches per Round</th>
+      <th>Total Stitches</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><input type="number" id="round1" value="0"></td>
+      <td><input type="number" id="stitch1" value="0"></td>
+      <td id="total1">0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><input type="number" id="round2" value="0"></td>
+      <td><input type="number" id="stitch2" value="0"></td>
+      <td id="total2">0</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><input type="number" id="round3" value="0"></td>
+      <td><input type="number" id="stitch3" value="0"></td>
+      <td id="total3">0</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><input type="number" id="round4" value="0"></td>
+      <td><input type="number" id="stitch4" value="0"></td>
+      <td id="total4">0</td>
+    </tr>
+  </table>
+
+  <div style="text-align:center; margin-top:20px;">
+    <label>
+      <input type="checkbox" id="helper" checked> Helper Present
+    </label>
+  </div>
+
+  <div class="summary">
+    Grand Total Stitches: <span id="grandTotal">0</span><br>
+    Amount (Stitches × 0.008): <span id="amount">0</span><br>
+    Final Amount (with bonuses): <span id="finalAmount">0</span>
+  </div>
+
+  <button class="btn" id="submitBtn">Submit</button>
+
+  <script>
+    // Show info from previous page
+    const params = new URLSearchParams(window.location.search);
+    const date = params.get('date');
+    const employee = params.get('employee');
+    const machine = params.get('machine');
+    document.getElementById('info').innerHTML =
+      `Date: ${date} | Employee: ${employee} | Machine: ${machine}`;
+
+    let grandTotal = 0;
+    let finalAmount = 0;
+
+    function calculate() {
+      grandTotal = 0;
+      for (let i = 1; i <= 4; i++) {
+        const rounds = parseInt(document.getElementById('round' + i).value) || 0;
+        const stitches = parseInt(document.getElementById('stitch' + i).value) || 0;
+        const total = rounds * stitches;
+        document.getElementById('total' + i).innerText = total;
+        grandTotal += total;
+      }
+      document.getElementById('grandTotal').innerText = grandTotal;
+
+      // Base amount
+      let amount = grandTotal * 0.008;
+      document.getElementById('amount').innerText = amount.toFixed(2);
+
+      // Bonuses
+      finalAmount = amount;
+      const helperChecked = document.getElementById('helper').checked;
+      if (!helperChecked) {
+        finalAmount += 100; // bonus if no helper
+      }
+      if (grandTotal > 300000) {
+        finalAmount += 100; // extra bonus for >300k stitches
+      }
+
+      document.getElementById('finalAmount').innerText = finalAmount.toFixed(2);
+    }
+
+    // Attach event listeners
+    for (let i = 1; i <= 4; i++) {
+      document.getElementById('round' + i).addEventListener('input', calculate);
+      document.getElementById('stitch' + i).addEventListener('input', calculate);
+    }
+    document.getElementById('helper').addEventListener('change', calculate);
+
+    // Submit button
+    document.getElementById('submitBtn').addEventListener('click', function() {
+      // Ensure latest calculation
+      calculate();
+      // Pass data to next page
+      window.location.href = `result.html?date=${date}&employee=${employee}&machine=${machine}&stitches=${grandTotal}&amount=${finalAmount.toFixed(2)}`;
+    });
+  </script>
+</body>
+</html>

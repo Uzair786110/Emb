@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Final Result</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align:center; margin-top:50px; }
+    .card { display:inline-block; padding:20px; border:1px solid #ccc; border-radius:8px; background:#f9f9f9; }
+    .card h2 { margin-bottom:20px; }
+    .card p { margin:8px 0; }
+    .btn { display: inline-block; padding: 10px 20px; background: #0078d7; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; text-decoration: none; }
+     .btn:hover { background: #005fa3; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Assignment Summary</h2>
+    <p id="date"></p>
+    <p id="employee"></p>
+    <p id="machine"></p>
+    <p id="stitches"></p>
+    <p id="amount"></p>
+     <button class="btn" onclick="window.location.href='table.html'">View Table</button>
+
+  </div>
+ 
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('date').innerText = "Date: " + params.get('date');
+    document.getElementById('employee').innerText = "Employee: " + params.get('employee');
+    document.getElementById('machine').innerText = "Machine: " + params.get('machine');
+    document.getElementById('stitches').innerText = "Total Stitches: " + params.get('stitches');
+    document.getElementById('amount').innerText = "Final Amount: " + params.get('amount');
+  </script>
+</body>
+</html>
