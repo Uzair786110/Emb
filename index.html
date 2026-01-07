@@ -3,21 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <title>Employee & Machine Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    form {
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 
 <body>
-  <h2>Assign Machine</h2>
   <form id="assignForm">
+    <h2>Assign Machine</h2>
     <label>Date:</label>
-    <input type="date" id="date" required><br><br>
+    <input type="date" id="date" required>
 
     <label>Employee:</label>
     <select id="employee" required>
       <option value="">-- Select Employee --</option>
-      <option value="Alice">Noman </option>
+      <option value="Alice">Noman</option>
       <option value="Bob">Shahzaib</option>
       <option value="Charlie">Aqib</option>
-    </select><br><br>
+    </select>
 
     <label>Machine:</label>
     <select id="machine" required>
@@ -25,7 +88,7 @@
       <option value="Lathe">M1</option>
       <option value="Drill">M2</option>
       <option value="CNC">M3</option>
-    </select><br><br>
+    </select>
 
     <button type="submit">Go to Next Page</button>
   </form>
@@ -43,4 +106,3 @@
   </script>
 </body>
 </html>
-
